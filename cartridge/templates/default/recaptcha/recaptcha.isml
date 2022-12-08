@@ -1,8 +1,10 @@
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<iscomment> <isif condition="${dw.system.Site.current.preferences.custom.sfraEnableRecaptchaV2}"> </iscomment>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-<script type="text/javascript">
-    var checkCaptchaLogin = function(response) {
-        $('form.login').submit();
-        grecaptcha.reset();
-    };
-</script>
+    <script type="text/javascript">
+        var checkCaptchaLogin = function(response) {
+            $('form.login').submit();
+            grecaptcha.reset();
+        };
+    </script>
+<iscomment> </isif> </iscomment>
