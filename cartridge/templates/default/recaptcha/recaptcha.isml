@@ -6,5 +6,15 @@
             $('form.login').submit();
             grecaptcha.reset();
         };
+        
+        var checkCaptchaRegister = function(response) {
+            $('form.registration').submit();
+            grecaptcha.reset();
+        };
+
+        var checkCaptchaNewsletter = function(response) {
+            $('form.newssub-form').submit();
+            grecaptcha.reset();
+        };
     </script>
 </isif>
