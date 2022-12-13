@@ -1,20 +1,8 @@
 <isif condition="${dw.system.Site.current.preferences.custom.sfraEnableGoogleRecaptchaV2}">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-    <script type="text/javascript">
-        var checkCaptchaLogin = function(response) {
-            $('form.login').submit();
-            grecaptcha.reset();
-        };
-        
-        var checkCaptchaRegister = function(response) {
-            $('form.registration').submit();
-            grecaptcha.reset();
-        };
-
-        var checkCaptchaNewsletter = function(response) {
-            $('form.newssub-form').submit();
-            grecaptcha.reset();
-        };
-    </script>
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('https://www.google.com/recaptcha/api.js');
+        assets.addJs('/js/recaptcha.js');
+        assets.addCss('/css/recaptcha.css');
+    </isscript>
 </isif>
