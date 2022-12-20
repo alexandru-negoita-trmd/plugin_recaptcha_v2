@@ -2,6 +2,23 @@
 <metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
     <type-extension type-id="SitePreferences">
         <custom-attribute-definitions>
+            <attribute-definition attribute-id="sfraGoogleRecaptchaType">
+                <display-name xml:lang="x-default">Google Recaptcha Type</display-name>
+                <description xml:lang="x-default">Choose which Google Recaptcha type to use</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Invisible</display>
+                        <value>Invisible</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Checkbox</display>
+                        <value>Checkbox</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
             <attribute-definition attribute-id="sfraEnableGoogleRecaptchaV2">
                 <display-name xml:lang="x-default">Enable Google reCAPTCHA v2</display-name>
                 <description xml:lang="x-default">Enable/Disable recaptcha in a few forms such as Login, Register, Payment, Newsletter</description>
