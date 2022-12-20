@@ -14,7 +14,12 @@
             <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
             
             <isif condition="${dw.system.Site.current.preferences.custom.sfraEnableGoogleRecaptchaV2 && dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey}">
-                <button type="submit" class="g-recaptcha btn btn-save btn-block btn-primary" data-sitekey="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey}" data-callback="checkCaptchaNewsletter">${Resource.msg('news.subscribe','customemails',null)}</button>
+                <isif condition="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaType.value === 'Checkbox'}">
+                    <div class="g-recaptcha" data-sitekey="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey}"></div>
+                    <button type="submit" class="btn btn-save btn-block btn-primary">${Resource.msg('news.subscribe','customemails',null)}</button>
+                <iselse>
+                    <button type="submit" class="g-recaptcha btn btn-save btn-block btn-primary" data-sitekey="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey}" data-callback="checkCaptchaNewsletter">${Resource.msg('news.subscribe','customemails',null)}</button>
+                </isif>
             <iselse>
                 <button type="submit" class="btn btn-save btn-block btn-primary">${Resource.msg('news.subscribe','customemails',null)}</button>
             </isif>
