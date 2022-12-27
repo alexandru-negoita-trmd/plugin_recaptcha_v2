@@ -12,7 +12,7 @@
     <!----------------------------------------------------------------------------------->
     <!-- reCAPTCHA template -->
     <!----------------------------------------------------------------------------------->
-    <isinclude template="recaptcha/recaptcha" />
+    <iscomment> <isinclude template="recaptcha/recaptcha" /> </iscomment>
 
     <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
         <isinclude template="reporting/reportingUrls" />
@@ -100,30 +100,40 @@
                 <div class="row">
                     <div class="col-12 next-step-button">
                         <div class="mb-sm-3">
-                            <button class="btn btn-primary btn-block submit-shipping" type="submit" name="submit" value="submit-shipping" <isif condition="${pdict.order.usingMultiShipping && !pdict.order.shippable}">disabled</isif>>
-                                ${Resource.msg('button.next.payment', 'checkout', null)}
-                            </button>
 
                             <isif condition="${dw.system.Site.current.preferences.custom.sfraEnableGoogleRecaptchaV2 && dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey}">
                                 <isif condition="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaType.value === 'Checkbox'}">
-                                    <div class="g-recaptcha" data-sitekey="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey}"></div>
+                                    <button class="btn btn-primary btn-block submit-shipping" type="submit" name="submit" value="submit-shipping" <isif condition="${pdict.order.usingMultiShipping && !pdict.order.shippable}">disabled</isif>>
+                                        ${Resource.msg('button.next.payment', 'checkout', null)}
+                                    </button>
+                                <iselse/>
+                                    <button
+                                            id="btn-submit-shipping"
+                                            class="btn btn-primary btn-block submit-shipping"
+                                            type="submit"
+                                            name="submit"
+                                            value="submit-shipping" <isif condition="${pdict.order.usingMultiShipping && !pdict.order.shippable}">disabled</isif>>
+                                        ${Resource.msg('button.next.payment', 'checkout', null)}
+                                    </button>
+                                </isif>
+                            <iselse>
+                                <button class="btn btn-primary btn-block submit-shipping" type="submit" name="submit" value="submit-shipping" <isif condition="${pdict.order.usingMultiShipping && !pdict.order.shippable}">disabled</isif>>
+                                    ${Resource.msg('button.next.payment', 'checkout', null)}
+                                </button>
+                            </isif>
+
+                            <isif condition="${dw.system.Site.current.preferences.custom.sfraEnableGoogleRecaptchaV2 && dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey}">
+                                <isif condition="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaType.value === 'Checkbox'}">
                                     <button
                                         type="submit"
                                         class="btn btn-primary btn-block submit-payment"
                                     >
                                         ${Resource.msg('button.next.place.order', 'checkout', null)}
                                     </button>
-                                    <button id="button-hidden" class="hidden btn btn-primary btn-block submit-payment" type="submit" name="submit" value="submit-payment"></button>
                                 <iselse>
-                                    <button
-                                        type="submit"
-                                        class="g-recaptcha btn btn-primary btn-block submit-payment"
-                                        data-sitekey="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey}"
-                                        data-callback="checkCaptchaPlaceOrder"
-                                    >
+                                    <button id="btn-submit-payment" class="btn btn-primary btn-block submit-payment" type="submit" name="submit" value="submit-payment">
                                         ${Resource.msg('button.next.place.order', 'checkout', null)}
                                     </button>
-                                    <button id="button-hidden" class="hidden btn btn-primary btn-block submit-payment" type="submit" name="submit" value="submit-payment"></button>
                                 </isif>
                             <iselse>
                                 <button class="btn btn-primary btn-block submit-payment" type="submit" name="submit" value="submit-payment">

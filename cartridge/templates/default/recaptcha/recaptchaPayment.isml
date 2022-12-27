@@ -1,0 +1,7 @@
+<isif condition="${dw.system.Site.current.preferences.custom.sfraEnableGoogleRecaptchaV2}">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('https://www.google.com/recaptcha/api.js');
+        assets.addJs('/js/recaptchaPayment.js');
+    </isscript>
+</isif>

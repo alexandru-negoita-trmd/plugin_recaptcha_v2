@@ -1,0 +1,77 @@
+<div class="card-body shipping-content">
+
+    <!-------------------------------------------------------------------------->
+    <!-- Google Recaptcha scripts                                             -->
+    <!-------------------------------------------------------------------------->
+    <isinclude template="recaptcha/recaptchaPayment" />
+
+    <form class="shipping-form" autocomplete="on" novalidate
+          action="${shipmentLoopState
+          ? URLUtils.url('CheckoutAddressServices-AddNewAddress')
+          : URLUtils.url('CheckoutShippingServices-SubmitShipping')}"
+          data-address-mode="${shippingModel.matchingAddressId ? 'edit' : 'new'}"
+          <isprint value=${pdict.forms.shippingForm.attributes} encoding="off"/>
+    >
+        <isif condition="${lineItem}">
+            <input name="productLineItemUUID" type="hidden" value="${lineItem.UUID}" />
+        </isif>
+
+        <input name="originalShipmentUUID" type="hidden" value="${shippingModel.UUID}" />
+        <input name="shipmentUUID" type="hidden" value="${shippingModel.UUID}" />
+
+        <div class="shipping-address ${pdict.order.usingMultiShipping ? 'd-none' : ''}">
+            <fieldset class="shipment-selector-block ${(pdict.order.usingMultiShipping || shipmentLoopState) || (pdict.customer.addresses && pdict.customer.addresses.length > 0) ? '' : 'd-none'} ">
+                <isinclude template="checkout/shipping/shipmentSelector" />
+            </fieldset>
+
+            <fieldset class="shipping-address-block">
+                <isinclude template="checkout/shipping/shippingAddress" />
+            </fieldset>
+
+            <fieldset class="shipping-method-block">
+                <h3>${Resource.msg('heading.shipping.method', 'checkout', null)}</h3>
+
+                <isinclude template="checkout/shipping/shippingMethod" />
+            </fieldset>
+
+            <fieldset class="gift-message-block">
+                <isinclude template="checkout/shipping/isGift" />
+            </fieldset>
+        </div>
+
+        <div class="view-address-block ${shippingModel.shippingAddress ? '' : 'd-none' }">
+            <isinclude template="checkout/shipping/shippingCard" />
+        </div>
+
+        <isinclude template="checkout/shipping/multiShippingButtons" />
+
+        <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
+
+        <!-------------------------------------------------------------------------->
+        <!-- Google Recaptcha body                                                -->
+        <!-------------------------------------------------------------------------->
+        <isif condition="${dw.system.Site.current.preferences.custom.sfraEnableGoogleRecaptchaV2 && dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey && !shipmentLoopState}">
+            <isif condition="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaType.value === 'Checkbox'}">
+                <div
+                    class="g-recaptcha"
+                    data-sitekey="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey}">
+                </div>
+            <iselse>
+                <div
+                    id="recaptcha_shipping"
+                    class="g-recaptcha"
+                    data-callback="onSubmitRecaptchaShipping"
+                    data-expired-callback="onExpiredRecaptchaShipping"
+                    data-size="invisible"
+                    data-sitekey="${dw.system.Site.current.preferences.custom.sfraGoogleRecaptchaV2SiteKey}">
+                </div>
+            </isif>
+        </isif>
+    </form>
+</div>
+
+
+
+
+
+
