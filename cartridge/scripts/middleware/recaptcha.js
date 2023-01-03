@@ -1,6 +1,7 @@
 'use strict';
 
 var recaptchaSitePreferences = require('../helpers/recaptchaSitePreferences');
+var request = require('request');
 
 /**
  *
@@ -13,6 +14,9 @@ function validateRecaptcha(req, res, next) {
 
     if (recaptchaSitePreferences.isRecaptchaV2Enabled()) {
         var recaptchaIsChecked = req.form['g-recaptcha-response'];
+        var recaptchaVerificationURL = 'https://www.google.com/recaptcha/api/siteverify';
+        var recaptchaSecretKey = recaptchaSitePreferences.getRecaptchaSecretKey();
+
         if (!recaptchaIsChecked) {
             res.json(
                 {
@@ -22,10 +26,24 @@ function validateRecaptcha(req, res, next) {
                     serverErrors: [Resource.msg('error.message.invalid.recaptcha', 'recaptcha', null)]
                 }
             );
+        } else {
+            request.post({
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                url: recaptchaVerificationURL,
+                body: {
+                    secret: recaptchaSecretKey,
+                    response: recaptchaIsChecked
+                }},
+                function (error, reponse, body) {
+                    console.log(body);
+                }
+                );
+            };
         }
-    }
 
-    next();
+        next();
 }
 
 module.exports = {
