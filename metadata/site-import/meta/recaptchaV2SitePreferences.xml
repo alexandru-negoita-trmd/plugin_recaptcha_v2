@@ -35,11 +35,21 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <default-value></default-value>
             </attribute-definition>
+            <attribute-definition attribute-id="sfraGoogleRecaptchaV2SecretKey">
+                <display-name xml:lang="x-default">Google reCAPTCHA v2 Secret Key</display-name>
+                <description xml:lang="x-default">Secret Key generated from https://www.google.com/recaptcha/admin/create</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value></default-value>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="Google reCaptcha">
                 <attribute attribute-id="sfraEnableGoogleRecaptchaV2"/>
                 <attribute attribute-id="sfraGoogleRecaptchaV2SiteKey"/>
+                <attribute attribute-id="sfraGoogleRecaptchaType"/>
+                <attribute attribute-id="sfraGoogleRecaptchaV2SecretKey"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
