@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-credential service-credential-id="reCaptchaV2Credentials">
+        <url>https://www.google.com/recaptcha/api/siteverify</url>
+        <user-id/>
+        <password encrypted="true" encryption-type="common.export">72vndMFFI7ZYNvXZHA3AiG0QlG/fqGh09uMcHjNxGEE=</password>
+    </service-credential>
+
+    <service-profile service-profile-id="reCaptchaV2Profile">
+        <timeout-millis>1000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="recaptcha.v2.service">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>recaptcha</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>reCaptchaV2Profile</profile-id>
+        <credential-id>reCaptchaV2Credentials</credential-id>
+    </service>
+
+</services>
