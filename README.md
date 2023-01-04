@@ -6,20 +6,27 @@ The following cartridge integrates the Google reCAPTCHA v2 service into RACE. It
 - Login
 - Register
 - Payment
-- Newsletter Signup
 
 ## Implementation guide
 
 ### Cartridge installation
 
 a)	Import metadata:
-There are two XML files which need to be imported. One for the 
+There are two XML files which need to be imported. One for the custom attributes and one for the HTTP service to be called externally.
 
--	In the cartridge folder find \metadata\site-import\meta\recaptchaV2SitePreferences.xml and \recaptchaService.xml
+**Custom attributes**
+-	In the cartridge folder find \metadata\site-import\meta\recaptchaV2SitePreferences.xml
 -	Go to Business Manager > Administration > Site Development > Import & Export
--	Under Import & Export Files, click Upload and select the .xml files in the metadata folder
+-	Under Import & Export Files, click Upload and select the .xml file in the metadata folder
 -	Under Meta Data, click Import and select the files that you have just uploaded
--	This should create a new group containing multiple site preference attributes. To check whether the import was successful, go to Business Manager > Merchant Tools > Site Preferences > Custom Preferences. Search for Marketing Site group. Clicking it should return your attributes. As for the HTTP service, go to Administration > Operations > Services and find recaptca.v2.service.
+-	This should create a new group containing multiple site preference attributes. To check whether the import was successful, go to Business Manager > Merchant Tools > Site Preferences > Custom Preferences. Search for Marketing Site group. Clicking it should return your attributes.
+
+**HTTP service**
+-	In the cartridge folder find \metadata\site-import\meta\recaptchaService.xml
+-	Go to Business Manager > Administration > Operations > Import & Export
+-	Under Import & Export Files, click Upload and select the .xml file in the metadata folder
+-	Under Services, click Import and select the files that you have just uploaded
+-	This should create a new service under Administration > Operations Services with the id 'recaptcha.v2.service'.
 
 b)	Update the cartridge path:
 -	Go to Business Manager > Administration > Sites > Manage Sites
